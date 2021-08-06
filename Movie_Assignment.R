@@ -1,0 +1,12 @@
+install.packages("arules")
+install.packages("arulesViz")
+library("arules")
+library("arulesViz")
+#Movies.CSV
+data <- read.csv(file.choose())
+View(data)
+rules <-  apriori(as.matrix(data[,6:15]),parameter=list(support=0.2,minlen=2,confidence=0.7)) 
+summary(rules)
+inspect(sort(rules,by="lift"))
+plot(rules,pch=5)
+plot(rules,jitter=4,interactive = TRUE)
